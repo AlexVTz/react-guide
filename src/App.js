@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
-import Radium, {StyleRoot} from 'radium';
+import Classes from './App.css';
 import Person from './Person/Person';
 
 class App extends Component {
@@ -47,11 +46,7 @@ class App extends Component {
       font: 'inherit',
       border: '2px solid blue',
       padding: '8px',
-      cursor: 'pointer',
-      ':hover': {
-        backgroundColor: 'salmon',
-        color: 'black'
-      }
+      cursor: 'pointer'
     }
     let persons = null;
 
@@ -82,16 +77,15 @@ class App extends Component {
       classes = [];
     }else if(this.state.persons.length === 2){
       classes = [];
-      classes.push('red');
+      classes.push( Classes.red );
     } else if(this.state.persons.length >= 3){
       classes = [];
-      classes.push('red');
-      classes.push('bold');
+      classes.push( Classes.red );
+      classes.push( Classes.bold );
     }
 
     return (
-      <StyleRoot>
-        <div className="App">
+        <div className={Classes.App}>
           <h1>This is a React App</h1>
           <p className={classes.join(' ')}>
             To get started, edit <code>src/App.js</code> and save to reload.
@@ -102,11 +96,10 @@ class App extends Component {
           </button>
           {persons}
         </div>
-      </StyleRoot>
     );
    /*  return React.createElement('div', {className: "App"}, React.createElement('header', {className: "App-header"}, 
       React.createElement('img', {src: logo, className: "App-logo", alt: "logo"}), React.createElement('h1', {className: "App-title"}, "Welcome")));
  */  }
 }
 
-export default Radium(App);
+export default App;
