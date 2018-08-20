@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Classes from './App.css';
-import Person from './Person/Person';
+import Persons from '../Components/Persons/Persons';
+import Cockpit from '../Components/Cockpit/Cockpit';
 
 class App extends Component {
   state = {
@@ -13,7 +14,9 @@ class App extends Component {
   }
 
   nameChangedHandler = (event, id) => {
-    const personIndex = this.state.persons.findIndex( (p) => p.id === id );
+    const personIndex = this.state.persons.findIndex(
+      (p) => p.id === id 
+    );
     const person = {
       ...this.state.persons[personIndex]
     }
@@ -46,42 +49,17 @@ class App extends Component {
     if(this.state.showPersons) {
       persons = (
         <div>
-          {this.state.persons.map( (person, index) => {
-            return <Person 
-              key={person.id}
-              name={person.name} 
-              age={person.age}  
-              click={() => this.deletePersonHandler(index)}
-              changed={(event) => this.nameChangedHandler(event, person.id)}
-            />
-          })}
+          <Persons persons={this.state.persons} clicked={this.deletePersonHandler} 
+                    changed={this.nameChangedHandler} />
         </div>
       )
 
      buttonClass =  Classes.buttonStyleGreen;
     }
 
-    let classes = [];
-    if (this.state.persons.length <= 1){
-      classes = [];
-    }else if(this.state.persons.length === 2){
-      classes = [];
-      classes.push( Classes.red );
-    } else if(this.state.persons.length >= 3){
-      classes = [];
-      classes.push( Classes.red );
-      classes.push( Classes.bold );
-    }
-
     return (
         <div className={Classes.App}>
-          <h1>This is a React App</h1>
-          <p className={classes.join(' ')}>
-            To get started, edit <code>src/App.js</code> and save to reload.
-          </p>
-          <button onClick={this.tooglePersonHandler} className={buttonClass}>
-              Show/Hide
-          </button>
+          <Cockpit persons={this.state.persons} toogle={this.tooglePersonHandler} />
           {persons}
         </div>
     );
