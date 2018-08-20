@@ -40,15 +40,8 @@ class App extends Component {
   }
 
   render() {
-    const buttonStyle = {
-      backgroundColor: 'red',
-      color: 'white',
-      font: 'inherit',
-      border: '2px solid blue',
-      padding: '8px',
-      cursor: 'pointer'
-    }
     let persons = null;
+    let buttonClass = '';
 
     if(this.state.showPersons) {
       persons = (
@@ -65,11 +58,7 @@ class App extends Component {
         </div>
       )
 
-      buttonStyle.backgroundColor = 'green';
-      buttonStyle[':hover'] = {
-        backgroundColor: 'lightgreen',
-        color: 'black'
-      }
+     buttonClass =  Classes.buttonStyleGreen;
     }
 
     let classes = [];
@@ -90,8 +79,7 @@ class App extends Component {
           <p className={classes.join(' ')}>
             To get started, edit <code>src/App.js</code> and save to reload.
           </p>
-          <button onClick={this.tooglePersonHandler}
-            style={buttonStyle}>
+          <button onClick={this.tooglePersonHandler} className={buttonClass}>
               Show/Hide
           </button>
           {persons}
